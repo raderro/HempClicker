@@ -42,10 +42,10 @@ submitFarmNameBtn.addEventListener('click', function() {
     var maxChars = 20;
 
     if(farmName.trim()==''){
-        alert("Nazwa farmy nie może być pusta!");
+        alert("The farm name cannot be empty!");
     }
     else if(farmName.length > maxChars){
-        alert("Nazwa farmy nie może być dłuższa niż " + maxChars + " znaków!");
+        alert("The farm name cannot exceed " + maxChars + " characters!");
     }
     else{
         document.getElementById('farmNameHeader').innerHTML = "Farm name: " + farmName;
