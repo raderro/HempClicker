@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemp Clicker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="assets/shop-icon-remove.png" />
+</head>
+<body>
+    <div class="header"> 
+        <h1 style="font-size: 56px; text-shadow: 3px 4px black;">HEMP CLICKER</h1>
+    </div>
+
+
+    <div id="farmNameModal" class="modal">
+        <div class="modal-content">
+          <h2>Witaj na swojej farmie konopi!</h2>
+          <p>Prosze podac nazwe swojej farmy konopi:</p>
+          <input class="inputDefault" type="text" id="farmNameInput">
+          <button class="buttonDefault" id="submitNameBtn">Zatwierdź</button>
+        </div>
+      </div>
+
+    <div id="game">
+        <div class="hempCounter" id="hempCounter">Hemp: 0</div>
+        <button class="hempButton" id="hempButton"><img src="assets/shop-icon-remove.png" draggable="false" width="400" height="400px"/></button>
+
+        <div class="leftSite">
+            <div style="float: left; margin-right: 20px;">
+                <h2 style="text-shadow: 3px 4px black;" id="farmNameHeader">Farm Name: </h2>
+            </div>
+            <br/>
+
+            <div class="clickUpgrade" id="clickUpgrade">
+                <h3>Upgrade click</h3>
+                <h3 id="clickUpgradeCost">10</h3>
+                <button class="buttonDefault" id="upgradeButton">Upgrade</button>
+            </div>
+
+            <br/>
+            <div class="Stats" id="Stats">
+                <h2>Stats</h2>
+                <h3 id="miniWorkersStats">Mini Workers: 0</h3>
+                <h3 id="midWorkersStats">Mid Workers: 0</h3>
+                <h3 id="bigWorkersStats">Big Workers: 0</h3>
+            </div>
+        </div>
+
+
+        <div class="upgradeList" id="upgradeList">
+            <h2>Workers</h2>
+            <div class="mini_worker" id="mini_worker">
+                <h3>Mini Worker</h3>
+                <h3 id="miniWorkerCost">100</h3>
+                <button class="buttonDefault" id="miniWorkerButton">Buy</button>
+            </div>
+            <div class="mid_worker" id="mid_worker">
+                <h3>Mid Worker</h3>
+                <h3 id="midWorkerCost">1000</h3>
+                <button class="buttonDefault" id="midWorkerButton">Buy</button>
+            </div>
+            <div class="Big Worker" id="Big Worker">
+                <h3>Big Worker</h3>
+                <h3 id="bigWorkerCost">10000</h3>
+                <button class="buttonDefault" id="bigWorkerButton">Buy</button>
+            </div>
+        </div>
+
+        <script src="main.js"></script>
+    </div>
+</body>
+</html>
