@@ -8,11 +8,6 @@
     <link rel="shortcut icon" href="assets/shop-icon-remove.png" />
 </head>
 <body>
-    <div class="header"> 
-        <h1 style="font-size: 56px; text-shadow: 3px 4px black;">HEMP CLICKER</h1>
-    </div>
-
-
     <div id="farmNameModal" class="modal">
         <div class="modal-content">
           <h2>Welcome to your hemp farm!</h2>
@@ -23,12 +18,9 @@
       </div>
 
     <div id="game">
-        <div class="hempCounter" id="hempCounter">Hemp: 0</div>
-        <button class="hempButton" id="hempButton"><img src="assets/shop-icon-remove.png" draggable="false" width="400" height="400px"/></button>
-
         <div class="leftSite">
-            <div style="float: left; margin-right: 20px;">
-                <h2 style="text-shadow: 3px 4px black;" id="farmNameHeader">Farm Name: </h2>
+            <div style="float: left;">
+                <h2 class="farmName" style="text-shadow: 3px 4px black;" id="farmNameHeader">Farm Name: </h2>
             </div>
             <br/>
 
@@ -45,8 +37,14 @@
                 <h3 id="midWorkersStats">Mid Workers: 0</h3>
                 <h3 id="bigWorkersStats">Big Workers: 0</h3>
             </div>
-        </div>
 
+            <div class="quests" id="quests">
+                <h2>Quests</h2>
+                <div class="quest" id="quest1_"><h3 id="quest1">Collect 10 hemp: 0/10</h3></div>
+                <div class="quest" id="quest2_"><h3 id="quest2">Quest 2: 0/100</h3></div>
+                <div class="quest" id="quest3_"><h3 id="quest3">Quest 3: 0/1000</h3></div>
+            </div>
+        </div>
 
         <div class="upgradeList" id="upgradeList">
             <h2>Workers</h2>
@@ -67,7 +65,18 @@
             </div>
         </div>
 
+        <div class="header"> 
+            <h1 style="font-size: 56px; text-shadow: 3px 4px black;">HEMP CLICKER</h1>
+        </div>
+
+        <div class="hempCounter" id="hempCounter">Hemp: 0</div>
+        <button class="hempButton" id="hempButton"><img src="assets/shop-icon-remove.png" draggable="false" width="400" height="400px"/></button>
+
         <script src="main.js"></script>
+    </div>
+
+    <div class="footer">
+        <h3>Created by: RADERRO</h3>
     </div>
 </body>
 </html>

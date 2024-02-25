@@ -25,6 +25,11 @@ bigWorkerButton = document.getElementById('bigWorkerButton');
 modal = document.getElementById("farmNameModal");
 submitFarmNameBtn = document.getElementById("submitNameBtn");
 
+let quest1hemp = 0;
+let quest1hempisDone = false;
+let quest1hempCollect = false;
+quest1 = document.getElementById('quest1');
+
 window.onload = function() {
     loadProgress();
     RefreshHemp();
@@ -72,6 +77,9 @@ function UpgradeClick(){
 
 hempButton.addEventListener('click', function() {
   hemp += multiplier;
+  if(quest1hempisDone == false){
+    Quest1();
+  }
   var clickSound = new Audio('assets/click.wav');
   clickSound.play();
   timeout = setTimeout(RefreshHemp, 1);
@@ -173,6 +181,8 @@ function RefreshHemp() {
     else if(workers.big.cost > 1000000 && workers.big.cost < 1000000000){
         document.getElementById('bigWorkerCost').innerHTML = (Math.floor(workers.big.cost / 10000) / 100).toFixed(1) + "M";
     }
+
+    quest1.innerHTML = "Collect 10 hemp: " + quest1hemp + "/10";
 }
 
 function Worker_Mini(){
@@ -208,6 +218,27 @@ function Worker_Big(){
     }, 1000);
 }
 
+function Quest1(){
+    quest1.innerHTML = "Collect 10 hemp: " + quest1hemp + "/10";
+
+    if(quest1hempisDone == false){
+        if(quest1hemp < 10){
+            quest1hemp += 1;
+        }
+        else if(quest1hemp >= 10){
+            quest1hempisDone = true;
+        }
+    }
+
+    if(quest1hempisDone == true && quest1hempCollect == false){
+        quest1hempCollect = true;
+        hemp += 100;
+        document.getElementById('quest1_').remove();
+    }
+
+    quest1.innerHTML = "Collect 10 hemp: " + quest1hemp + "/10";
+}
+
 function saveProgress() {
     localStorage.setItem("hemp", hemp);
     localStorage.setItem("multiplier", multiplier);
@@ -215,6 +246,9 @@ function saveProgress() {
     localStorage.setItem("workers", JSON.stringify(workers));
     localStorage.setItem("newPlayer", newPlayer.toString());
     localStorage.setItem("farmName", document.getElementById('farmNameHeader').innerHTML);
+    localStorage.setItem("quest1hemp", quest1hemp);
+    localStorage.setItem("quest1hempisDone", quest1hempisDone.toString());
+    localStorage.setItem("quest1hempCollect", quest1hempCollect.toString());
 }
 
 function loadProgress() {
@@ -235,6 +269,19 @@ function loadProgress() {
     }
     if(localStorage.getItem("farmName")) {
         document.getElementById('farmNameHeader').innerHTML = localStorage.getItem("farmName");
+    }
+    if(localStorage.getItem("quest1hemp")) {
+        quest1hemp = parseInt(localStorage.getItem("quest1hemp"));
+    }
+    if(localStorage.getItem("quest1hempisDone")) {
+        quest1hempisDone = localStorage.getItem("quest1hempisDone") === "true";
+    }
+    if(localStorage.getItem("quest1hempCollect")) {
+        quest1hempCollect = localStorage.getItem("quest1hempCollect") === "true";
+    }
+
+    if(quest1hempisDone == true && quest1hempCollect == true){
+        document.getElementById('quest1_').remove();
     }
 
     let add_mini_workers = workers.mini.quantity;
@@ -274,6 +321,12 @@ function resetProgress() {
     localStorage.removeItem("newPlayer");
     document.getElementById('farmNameHeader').innerHTML = "Farm name: ";
     localStorage.removeItem("farmName");
+    quest1hemp = 0;
+    localStorage.removeItem("quest1hemp");
+    quest1hempisDone = false;
+    localStorage.removeItem("quest1hempisDone");
+    quest1hempCollect = false;
+    localStorage.removeItem("quest1hempCollect");
 
     console.log("Postęp gry został zresetowany.");
 }
