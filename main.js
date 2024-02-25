@@ -30,6 +30,16 @@ let quest1hempisDone = false;
 let quest1hempCollect = false;
 quest1 = document.getElementById('quest1');
 
+let quest2upgrade = 0;
+let quest2upgradeisDone = false;
+let quest2upgradeCollect = false;
+quest2 = document.getElementById('quest2');
+
+let quest3buy = 0;
+let quest3buyisDone = false;
+let quest3buyCollect = false;
+quest3 = document.getElementById('quest3');
+
 window.onload = function() {
     loadProgress();
     RefreshHemp();
@@ -71,6 +81,9 @@ function UpgradeClick(){
         hemp -= upgradeCost;
         multiplier += 0.1;
         upgradeCost += 15;
+        if(quest2upgradeisDone == false){
+            Quest2();
+        }
         RefreshHemp();
     }
 }
@@ -93,6 +106,9 @@ miniWorkerButton.addEventListener('click', function() {
         hemp -= workers.mini.cost;
         workers.mini.quantity += 1;
         workers.mini.cost += 25;
+        if(quest3buyisDone == false){
+            Quest3();
+        }
         document.getElementById('miniWorkerCost').innerHTML = workers.mini.cost;
         miniworker = new Worker_Mini();
     }
@@ -183,11 +199,25 @@ function RefreshHemp() {
     }
 
     quest1.innerHTML = "Collect 10 hemp: " + quest1hemp + "/10";
+    quest2.innerHTML = "Upgrade clicker 3 times: " + quest2upgrade + "/3";
+    quest3.innerHTML = "Buy your first mini worker: " + quest3buy + "/1";
+
+    if(quest1hempisDone == true && quest1hempCollect == false){
+        document.getElementById('quest1_').remove();
+    }
+
+    if(quest2upgradeisDone == true && quest2upgradeCollect == false){
+        document.getElementById('quest2_').remove();
+    }
+
+    if(quest3buyisDone == true && quest3buyCollect == false){
+        document.getElementById('quest3_').remove();
+    }
 }
 
 function Worker_Mini(){
-    /*
-    dodaje zdjęcie pracownika do strony DZIAŁA
+    
+    /*dodaje zdjęcie pracownika do strony DZIAŁA
 
     const img_mini_worker = document.createElement("img");
     img_mini_worker.src = "assets/pngaaa.com-490587.png";
@@ -225,7 +255,7 @@ function Quest1(){
         if(quest1hemp < 10){
             quest1hemp += 1;
         }
-        else if(quest1hemp >= 10){
+        if(quest1hemp >= 10){
             quest1hempisDone = true;
         }
     }
@@ -239,6 +269,48 @@ function Quest1(){
     quest1.innerHTML = "Collect 10 hemp: " + quest1hemp + "/10";
 }
 
+function Quest2(){
+    quest2.innerHTML = "Upgrade clicker 3 times: " + quest2upgrade + "/3";
+
+    if(quest2upgradeisDone == false){
+        if(quest2upgrade < 3){
+            quest2upgrade += 1;
+        }
+        if(quest2upgrade >= 3){
+            quest2upgradeisDone = true;
+        }
+    }
+
+    if(quest2upgradeisDone == true && quest2upgradeCollect == false){
+        quest2upgradeCollect = true;
+        hemp += 200;
+        document.getElementById('quest2_').remove();
+    }
+
+    quest2.innerHTML = "Upgrade clicker 3 times: " + quest2upgrade + "/3";
+}
+
+function Quest3(){
+    quest3.innerHTML = "Buy your first mini worker: " + quest3buy + "/1";
+
+    if(quest3buyisDone == false){
+        if(quest3buy < 1){
+            quest3buy += 1;
+        }
+        if(quest3buy >= 1){
+            quest3buyisDone = true;
+        }
+    }
+
+    if(quest3buyisDone == true && quest3buyCollect == false){
+        quest3buyCollect = true;
+        hemp += 150;
+        document.getElementById('quest3_').remove();
+    }
+
+    quest3.innerHTML = "Buy your first mini worker: " + quest3buy + "/1";
+}
+
 function saveProgress() {
     localStorage.setItem("hemp", hemp);
     localStorage.setItem("multiplier", multiplier);
@@ -249,6 +321,12 @@ function saveProgress() {
     localStorage.setItem("quest1hemp", quest1hemp);
     localStorage.setItem("quest1hempisDone", quest1hempisDone.toString());
     localStorage.setItem("quest1hempCollect", quest1hempCollect.toString());
+    localStorage.setItem("quest2upgrade", quest2upgrade);
+    localStorage.setItem("quest2upgradeisDone", quest2upgradeisDone.toString());
+    localStorage.setItem("quest2upgradeCollect", quest2upgradeCollect.toString());
+    localStorage.setItem("quest3buy", quest3buy);
+    localStorage.setItem("quest3buyisDone", quest3buyisDone.toString());
+    localStorage.setItem("quest3buyCollect", quest3buyCollect.toString());
 }
 
 function loadProgress() {
@@ -279,9 +357,35 @@ function loadProgress() {
     if(localStorage.getItem("quest1hempCollect")) {
         quest1hempCollect = localStorage.getItem("quest1hempCollect") === "true";
     }
+    if(localStorage.getItem("quest2upgrade")) {
+        quest2upgrade = parseInt(localStorage.getItem("quest2upgrade"));
+    }
+    if(localStorage.getItem("quest2upgradeisDone")) {
+        quest2upgradeisDone = localStorage.getItem("quest2upgradeisDone") === "true";
+    }
+    if(localStorage.getItem("quest2upgradeCollect")) {
+        quest2upgradeCollect = localStorage.getItem("quest2upgradeCollect") === "true";
+    }
+    if(localStorage.getItem("quest3buy")) {
+        quest3buy = parseInt(localStorage.getItem("quest3buy"));
+    }
+    if(localStorage.getItem("quest3buyisDone")) {
+        quest3buyisDone = localStorage.getItem("quest3buyisDone") === "true";
+    }
+    if(localStorage.getItem("quest3buyCollect")) {
+        quest3buyCollect = localStorage.getItem("quest3buyCollect") === "true";
+    }
 
     if(quest1hempisDone == true && quest1hempCollect == true){
         document.getElementById('quest1_').remove();
+    }
+
+    if(quest2upgradeisDone == true && quest2upgradeCollect == true){
+        document.getElementById('quest2_').remove();
+    }
+
+    if(quest3buyisDone == true && quest3buyCollect == true){
+        document.getElementById('quest3_').remove();
     }
 
     let add_mini_workers = workers.mini.quantity;
@@ -327,6 +431,18 @@ function resetProgress() {
     localStorage.removeItem("quest1hempisDone");
     quest1hempCollect = false;
     localStorage.removeItem("quest1hempCollect");
+    quest2upgrade = 0;
+    localStorage.removeItem("quest2upgrade");
+    quest2upgradeisDone = false;
+    localStorage.removeItem("quest2upgradeisDone");
+    quest2upgradeCollect = false;
+    localStorage.removeItem("quest2upgradeCollect");
+    quest3buy = 0;
+    localStorage.removeItem("quest3buy");
+    quest3buyisDone = false;
+    localStorage.removeItem("quest3buyisDone");
+    quest3buyCollect = false;
+    localStorage.removeItem("quest3buyCollect");
 
     console.log("Postęp gry został zresetowany.");
 }
