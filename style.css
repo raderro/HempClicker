@@ -172,6 +172,19 @@ body {
     text-align: center;
 }
 
+.progress {
+    border-radius: 7px; 
+    height: 18px;
+    box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
+}
+.progress::-webkit-progress-bar {
+    border-radius: 7px;
+}
+.progress::-webkit-progress-value {
+    background-color: rgb(0, 82, 189);
+    border-radius: 7px;
+}
+
 @font-face {
     font-family: "SocialMonster";
     src: url('assets/SocialMonsterNormal-OwJp.ttf');

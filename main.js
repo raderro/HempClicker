@@ -29,16 +29,19 @@ let quest1hemp = 0;
 let quest1hempisDone = false;
 let quest1hempCollect = false;
 quest1 = document.getElementById('quest1');
+quest1Progress = document.getElementById('quest1Progress');
 
 let quest2upgrade = 0;
 let quest2upgradeisDone = false;
 let quest2upgradeCollect = false;
 quest2 = document.getElementById('quest2');
+quest2Progress = document.getElementById('quest2Progress');
 
 let quest3buy = 0;
 let quest3buyisDone = false;
 let quest3buyCollect = false;
 quest3 = document.getElementById('quest3');
+quest3Progress = document.getElementById('quest3Progress');
 
 window.onload = function() {
     loadProgress();
@@ -199,8 +202,11 @@ function RefreshHemp() {
     }
 
     quest1.innerHTML = "Collect 10 hemp: " + quest1hemp + "/10";
-    quest2.innerHTML = "Upgrade clicker 3 times: " + quest2upgrade + "/3";
-    quest3.innerHTML = "Buy your first mini worker: " + quest3buy + "/1";
+    quest1Progress.value = quest1hemp;
+    quest2.innerHTML = "Upgrade clicker 10 times: " + quest2upgrade + "/10";
+    quest2Progress.value = quest2upgrade;
+    quest3.innerHTML = "Buy the first 5 mini workers: " + quest3buy + "/5";
+    quest3Progress.value = quest3buy;
 
     if(quest1hempisDone == true && quest1hempCollect == false){
         document.getElementById('quest1_').remove();
@@ -270,13 +276,13 @@ function Quest1(){
 }
 
 function Quest2(){
-    quest2.innerHTML = "Upgrade clicker 3 times: " + quest2upgrade + "/3";
+    quest2.innerHTML = "Upgrade clicker 10 times: " + quest2upgrade + "/10";
 
     if(quest2upgradeisDone == false){
-        if(quest2upgrade < 3){
+        if(quest2upgrade < 10){
             quest2upgrade += 1;
         }
-        if(quest2upgrade >= 3){
+        if(quest2upgrade >= 10){
             quest2upgradeisDone = true;
         }
     }
@@ -287,17 +293,17 @@ function Quest2(){
         document.getElementById('quest2_').remove();
     }
 
-    quest2.innerHTML = "Upgrade clicker 3 times: " + quest2upgrade + "/3";
+    quest2.innerHTML = "Upgrade clicker 10 times: " + quest2upgrade + "/10";
 }
 
 function Quest3(){
-    quest3.innerHTML = "Buy your first mini worker: " + quest3buy + "/1";
+    quest3.innerHTML = "Buy the first 5 mini workers: " + quest3buy + "/5";
 
     if(quest3buyisDone == false){
-        if(quest3buy < 1){
+        if(quest3buy < 5){
             quest3buy += 1;
         }
-        if(quest3buy >= 1){
+        if(quest3buy >= 5){
             quest3buyisDone = true;
         }
     }
@@ -308,7 +314,7 @@ function Quest3(){
         document.getElementById('quest3_').remove();
     }
 
-    quest3.innerHTML = "Buy your first mini worker: " + quest3buy + "/1";
+    quest3.innerHTML = "Buy the first 5 mini workers: " + quest3buy + "/5";
 }
 
 function saveProgress() {
